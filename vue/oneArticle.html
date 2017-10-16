@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+ 
+<style type="text/css">
+ *{
+        font-size: 80px;
+ }
+ .content{
+      width: 100%;
+ }
+</style>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      <input type="text" v-model="obj.data.title">
+        <input type="text" v-model="obj.data.author">
+     <label>{{   obj.data.content  }}</label>
+    </div>
+<script src="js/vue.js"></script>
+<script src="js/vue-resource.js"></script>
+
+
+<script>
+
+
+  
+
+
+   var vm=new Vue({
+        el:"#app",
+        data:{
+            arr:{},
+            obj:{},
+            apiUrl: "https://interface.meiriyiwen.com/article/random?dev=1](https://interface.meiriyiwen.com/article/random?dev=1"
+        },
+   ready: function() {
+                    this. getreport()
+                    object=this.arr;
+              },
+              porps:{}
+        methods:{
+            getreport:function(apiUrl){
+                this.$http.get(this.apiUrl).then(function(response){
+                    this.arr=response.data;
+               
+                    this.obj=eval('('+this.arr+')');
+                    console.log(this.obj);
+                    
+                })
+            }
+        }
+   });
+
+
+
+
+</script>
+</body>
+</html>

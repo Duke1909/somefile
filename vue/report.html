@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+ 
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+    <ul>
+        <li v-for="item in arr">{{  item }}</li>
+        
+    </ul>
+    </div>
+<script src="js/vue.js"></script>
+<script src="js/vue-resource.js"></script>
+<script src="js/hmac-sha1.js"></script>
+
+
+<script>
+
+
+
+  
+
+
+   var vm=new Vue({
+        el:"#app",
+        data:{
+            arr:[],
+            apiUrl: "https://docs.teambition.com/all/doc"
+        },
+   ready: function() {
+                    this. getreport()
+                    alert();
+                },
+        methods:{
+            getreport:function(apiUrl){
+                this.$http.get(this.apiUrl).then(function(response){
+                    console.log(response);
+                })
+            }
+        }
+   });
+</script>
+</body>
+</html>
