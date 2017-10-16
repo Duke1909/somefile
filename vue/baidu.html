@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> baidu</title>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.js"></script>
+    <meta charset="utf-8">
+<style>
+    ul{
+        list-style: none;
+    }
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #app{
+        width:800px;
+        height:800px;
+        margin: 30px auto;
+        background-color: #ccc;
+        padding: 1px;
+    }
+    .grey{
+        background-color: #666;
+    }
+    img{
+        height:129px;
+        width:270px;
+        display: block;
+        margin: 30px auto;
+    }
+    #app input{
+        width:536px;
+        height: 40px;
+        display: inline-block;
+        margin: 30px auto;
+    }
+    #app div{
+        width:620px;
+        margin: 30px auto;
+    }
+    a{  width: 84px;
+        background-color: #38f;
+    }
+</style>
+</head>
+<body >
+<div id="app">
+
+    <div>
+        <img src="image/bd_logo.png" >
+        <input type="text" v-model="msg" @keyup="getmsg" @keydown.up.prevent="up()" @keydown.down="down()"/>
+        <a :href="url+'?wd='+msg"  >百度一下</a>
+        <ul>
+            <li v-for="(index,item) in arr" :class="{grey:nowIndex==index}" @click="fn1">{{ item }}</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    var url="http://sug.so.360.cn/suggest"
+    var vue=new Vue({
+        el:"#app",
+        data:{
+            arr:[],
+            msg:"",
+            nowIndex:-1,
+            url:"http://www.baidu.com",
+        },
+        created:function () {
+           this.getmsg();
+        },
+        methods:{
+           getmsg:function (){
+               this.$http.jsonp(url,{params:{word:this.msg}}).then(function(res){
+                   this.arr=res.data.s;
+                       console.log(res);
+               },function(){
+                       alert();
+                   }
+               )
+           },
+            up:function(){
+                this.nowIndex=(--this.nowIndex)%this.arr.length;
+
+            },
+            down:function(){
+                this.nowIndex= (++this.nowIndex)%this.arr.length;
+
+            },
+            fn1:function(){
+                this.msg=this.arr[this.nowIndex];
+                window.location.href(this.url+"?wd="+this.msg);
+
+            }
+        }
+    });
+
+
+
+</script>
