@@ -2,22 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
- 
+ <meta name="viewport" content="width=device-width,initial-scale=1">
 <style type="text/css">
- *{
-        font-size: 80px;
- }
+.title{
+    line-height: 25px;
+    font-size: 25px;
+    width: 70%;
+    text-align: center;
+    margin: 5px auto;
+}
+.author{
+     line-height: 18px;
+    font-size: 18px;
+    width: 70%;
+    text-align: center;
+    margin: 5px auto;
+
+}
  .content{
       width: 100%;
+ }
+ p{
+    width: 100%;
+    text-indent: 2em;
+    font-size: 18px;
+    overflow:hidden;
  }
 </style>
     <title>Document</title>
 </head>
 <body>
     <div id="app">
-      <input type="text" v-model="obj.data.title">
-        <input type="text" v-model="obj.data.author">
-     <label>{{   obj.data.content  }}</label>
+      <div class="title" v-html="obj.data.title"></div>
+      <div class="author"  v-html="obj.data.author"></div>
+     <div v-html=" obj.data.content  " ></div>
     </div>
 <script src="js/vue.js"></script>
 <script src="js/vue-resource.js"></script>
@@ -40,7 +58,7 @@
                     this. getreport()
                     object=this.arr;
               },
-              porps:{}
+          
         methods:{
             getreport:function(apiUrl){
                 this.$http.get(this.apiUrl).then(function(response){
