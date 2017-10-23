@@ -8,9 +8,12 @@
 <body>
 <div id="app">
       <div>  {{  msg  }}</div>
-            <div v-if="flag">
-                     用来显示的内容
-            </div>
+            <div v-if="flag">用来显示的内容</div>
+            <div v-else>else</div>
+            <div v-show="!flag">用来显示show的内容</div>
+    <ul>
+        <li v-for="(item,index) in items">{{  index  }}.{{  item  }}</li>
+    </ul>
 </div>
 </body>
 </html>
@@ -19,7 +22,8 @@ var vm=new Vue({
     el:"#app" , //id选择器
     data:{
         msg:"helloworld",
-        flag:false
+        flag:false,
+        items:['数据一','数据二','数据三','数据四','数据五','数据六']
     }
 
 });
