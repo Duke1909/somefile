@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/vue"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+      <div>  {{  msg  }}</div>
+            <div v-if="flag">
+                     用来显示的内容
+            </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+var vm=new Vue({
+    el:"#app" , //id选择器
+    data:{
+        msg:"helloworld",
+        flag:false
+    }
+
+});
+</script>
