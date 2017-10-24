@@ -4,16 +4,56 @@
     <meta charset="UTF-8">
     <script src="https://unpkg.com/vue"></script>
     <title>Document</title>
+    <style type="text/css">
+    .div{
+        width: 60%;
+        height: 100px;
+        margin: 20px auto;
+        background-color: #ccc;
+        text-align:center;
+        line-height: 100px;
+    }
+    .ul{
+         width: 60%;
+        height: 200px;
+        margin: 20px auto;
+        background-color: #ccc;
+        text-align:center;
+      
+    }
+    </style>
 </head>
 <body>
 <div id="app">
-      <div>  {{  msg  }}</div>
-            <div v-if="flag">用来显示的内容</div>
-            <div v-else>else</div>
-            <div v-show="!flag">用来显示show的内容</div>
-    <ul>
-        <li v-for="(item,index) in items">{{  index  }}.{{  item  }}</li>
-    </ul>
+   
+           <div class="div">
+                   <div v-if="!flag"> v-if :用来显示的内容</div>
+            </div>
+             <div class="div">
+                    <div v-else>else</div>
+            </div>
+            <div class="div">
+                    <div v-show="!flag">v-show:用来显示show的内容</div>
+            </div>
+             <ul class="ul">
+                     <li v-for="(item,index) in items" >{{  index  }}.{{  item  }}</li>
+            </ul>
+            <div class="div">
+            <div>  {{  msg  }}</div>
+                     <input type="text"  v-model="msg"> 
+            </div>
+              <div class="div">
+                    <input type="checkbox"  v-model="msg" value="helloworld" name="abc">
+                    <input type="checkbox"  v-model="msg" value="hellovue" name="abc">
+            </div>
+            <div v-on:click="fn"  class="div" >用来测试v-on</div>
+            <div class="div" v-bind:class="{div:!flag}">用来测试v-bind</div>
+            <div class="div" v-html="htmlmsg"></div>
+             <div class="div" v-text="htmlmsg"></div>
+
+
+
+
 </div>
 </body>
 </html>
@@ -21,9 +61,15 @@
 var vm=new Vue({
     el:"#app" , //id选择器
     data:{
-        msg:"helloworld",
+        msg:["helloworld","hellovue"],
         flag:false,
-        items:['数据一','数据二','数据三','数据四','数据五','数据六']
+        items:['数据一','数据二','数据三','数据四','数据五','数据六'],
+        htmlmsg:'<p>p标签</p>'
+    },
+    methods:{
+        fn:function(){
+            alert();
+        }
     }
 
 });
