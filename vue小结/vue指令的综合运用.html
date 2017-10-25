@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指令的综合运用</title>
+     <script src="https://unpkg.com/vue"></script>
+     <style type="text/css">
+        .div{
+             width: 40%;
+             height: 200px;
+             background-color: #ccc;
+             margin: 50px auto;
+             text-align: center;
+        }
+        ul{
+            list-style: none;
+        }
+        .del{
+            text-decoration-line:line-through;
+            color: #666;
+        }
+        ul li{
+              text-align: left;
+        }
+     </style>
+</head>
+<body>
+    <div  id="app" class="div">
+   <h3>共有{{  total.length  }}个任务,还剩{{  n  }}待办事项  <input type="button" value="删除" @click="del"></h3>
+        <ul>
+         <li v-for="(item ,index) in  total" :class="{ del:item.flag}"> 
+                    <input type="checkbox" name="itemcheckbox" @click="changeStyle(index)" />
+                    <span @click="editor(index)" v-show="!item.editor">{{item.item}}</span>
+                    <input type="text" v-show="item.editor" v-model="item.item"  
+                    @blur="editor(index)" @mouseenter="setFocus($event)"/>
+         </li>
+        </ul>
+            <input type="txt"  v-model="newItem.item">
+            <input type="button" value="添加" @click="add">
+    </div>
+   
+</body>
+
+</html>
+ <script type="text/javascript">
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            n:0,//代办项目，=
+            total:[
+            {"item":"running","flag":false,"editor":false},
+            {"item":"reading","flag":false,"editor":false},
+            {"item":"eating","flag":false,"editor":false}
+            ],
+            newItem:{"item":"","flag":false,"editor":false},
+        },
+        methods:{
+            changeStyle:function (index){
+                    this.total[index].flag=!this.total[index].flag;
+                    this.n=0;
+                    for (var i =0 ; i<this.total.length; i++) {
+                        if(this.total[i].flag) this.n++;
+                    }
+            },
+            editor:function(index){
+                    if(this.total[index].flag) return;
+                   this.total[index].editor=!this.total[index].editor;
+            },
+            setFocus:function(){
+                   event.target.focus();
+                    console.log(event);
+            },
+            del:function () {
+                 for (var i =0 ; i<this.total.length; ) {
+                        if(this.total[i].flag) this.total.splice(i,1);
+                        else{i++;}
+                    }
+                    
+            },
+            add:function(){
+                this.total.push(this.newItem);
+                this.newItem={"item":"","flag":false,"editor":false};
+            }
+        }
+    })
+    </script>
