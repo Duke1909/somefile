@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单练习代码</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style type="text/css">
+            #app{
+                width: 80%;
+                height: 200px;
+                margin: 40px auto;
+                text-align: center;
+
+            }
+            table{
+                width: 40%;
+           
+                margin: 20px auto;
+              
+            }
+             td{
+                border: 1px solid #000;
+                width:20%;
+                height: 30px
+            }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{  msg  }}
+        <table border="0" cellspacing="0" cellpadding="0">
+               
+            <tr >
+                         <td><span>id:</span></td>
+                         <td colspan="5" ><input type="text" name="" v-model="newPerson.id"></td>
+            </tr>
+            <tr>
+                         <td><span>youName</span></td>
+                         <td colspan="5" > <input type="text" name="" v-model="newPerson.name"></td>
+                       
+            </tr>
+            <tr>
+                         <td>
+                                 <span>sex:</span>
+                         </td>
+                         <td  colspan="5" >
+                                   
+                                     <select v-model="newPerson.sex">
+                                            <option value=true>男</option>
+                                            <option value=false>女</option>
+                                     </select>
+                        </td>
+                        
+            </tr>
+            <tr>
+                        <td>
+                                     <span>hobby:</span>
+                        </td>
+                        <td colspan="5" >
+                                     <span>run:</span>
+                                     <input type="checkbox" name="hobby" value="run"  v-model="newPerson.hobby">
+                                     <span>eat:</span>
+                                     <input type="checkbox" name="hobby" value="eat" v-model="newPerson.hobby">
+                                     
+                         </td>
+                        
+            </tr>
+                <tr>
+                         <td>
+                                     <span>备注</span>
+                         </td>
+                         <td colspan="5" >
+                                    <input type="text" v-model="newPerson.remark">
+                         </td>
+            </tr>
+            <tr>
+                         <td colspan="6">
+                                     <input type="button" value="添加" @click="add">
+                         </td>
+            </tr>
+            <tr>
+                         <td>学好</td>
+                         <td>名字</td>
+                         <td>性别</td>
+                         <td>爱好</td>
+                         <td>备注</td>
+                         <td>操作</td>
+
+
+                </tr>
+                <tr v-for="(item,index) in info">
+                            <td>{{  item.id  }}</td>
+                            <td>{{  item.name  }}</td>
+                            <td>{{  item.sex==true?"男":"女"  }}</td>
+                            <td>{{  item.hobby.toString()  }}</td>
+                            <td>{{item.remark}}</td>
+                            <td><input type="button" value="删除" @click="del(index)"></td>
+                </tr>
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm=new Vue({
+             el:"#app",
+             data:{
+                            newPerson: {"id":"","name":"","sex":true,"hobby":["run"],"remark":""},
+                             msg:"信息",
+                            info:[
+                                     {"id":1,"name":"jiang","sex":true,"hobby":["run","reading"],"remark":"没有备注"},
+                               ],
+        },
+             methods:{
+             add:function(){
+                         this.info.push(this.newPerson);
+                         this.newPerson={"id":"","name":"","sex":"true","hobby":["run"],"remark":""};
+            },
+             del:function(index){
+                         this.info.splice(index,1);
+             }
+        }
+    });
+</script>
